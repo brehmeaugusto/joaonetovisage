@@ -362,7 +362,7 @@ export default function JoaoNetoLanding() {
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <Image
-                    src="/3.jpg?height=2080&width=1170&text=Transformação+executiva+premium+antes+e+depois"
+                    src="/3.svg?height=2080&width=1170&text=Transformação+executiva+premium+antes+e+depois"
                     alt="Transformação executiva premium"
                     width={1170}
                     height={2080}
@@ -394,7 +394,7 @@ export default function JoaoNetoLanding() {
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <Image
-                    src="/4.jpg?height=2080&width=1170&text=Estilo+moderno+com+barba+alinhada+profissional"
+                    src="/4.svg?height=2080&width=1170&text=Estilo+moderno+com+barba+alinhada+profissional"
                     alt="Estilo moderno profissional"
                     width={1170}
                     height={2080}
@@ -424,7 +424,7 @@ export default function JoaoNetoLanding() {
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <Image
-                    src="/1.jpg?height=2080&width=1170&text=Visagismo+completo+jovem+executivo+elegante"
+                    src="/1.svg?height=2080&width=1170&text=Visagismo+completo+jovem+executivo+elegante"
                     alt="Visagismo jovem executivo"
                     width={1170}
                     height={2080}
@@ -456,7 +456,7 @@ export default function JoaoNetoLanding() {
               <CardContent className="p-0">
                 <div className="relative overflow-hidden">
                   <Image
-                    src="/2.jpg?height=2080&width=1170&text=Barba+esculpida+premium+design+personalizado"
+                    src="/2.svg?height=2080&width=1170&text=Barba+esculpida+premium+design+personalizado"
                     alt="Barba esculpida premium"
                     width={1170}
                     height={2080}
