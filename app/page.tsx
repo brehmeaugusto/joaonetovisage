@@ -20,7 +20,7 @@ export default function JoaoNetoLanding() {
   const whatsappMessage = encodeURIComponent(
     "Olá, gostaria de agendar um horário com o JoãoNeto | Visagista!"
   );
-  const whatsappNumber = "556332177937"; // Substitua pelo número real
+  const whatsappNumber = "556381152162"; // Substitua pelo número real
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
   return (
@@ -602,7 +602,7 @@ export default function JoaoNetoLanding() {
                       <p className="font-semibold text-premium-black text-lg mb-1">
                         WhatsApp
                       </p>
-                      <p className="text-gray-600 mb-1">+55 63 98437-6983</p>
+                      <p className="text-gray-600 mb-1">+55 63 98115-2162</p>
                       <p className="text-premium-gold text-sm font-medium">
                         Clique para conversar
                       </p>
