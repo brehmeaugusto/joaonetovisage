@@ -9,103 +9,19 @@ import {
   MapPin,
   MessageCircle,
   Sparkles,
-} from "lucide-react"
-import { Header } from "@/components/site/header"
-import { Reveal } from "@/components/site/reveal"
-import { Gallery, type GalleryImage } from "@/components/site/gallery"
-import { NAV, SITE } from "@/lib/site"
+  ArrowRight,
+  Check,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-const services = [
-  {
-    title: "Cortes modernos",
-    text: "Um corte alinhado ao seu estilo, à sua rotina e à imagem que você quer transmitir.",
-  },
-  {
-    title: "Consultoria de imagem",
-    text: "Orientação para construir uma imagem pessoal mais intencional e coerente.",
-  },
-  {
-    title: "Consultoria visagista",
-    text: "Atenção à harmonia entre cabelo, barba e os traços do seu rosto.",
-  },
-  {
-    title: "Barba",
-    text: "Acabamento preciso e cuidado com cada detalhe.",
-  },
-  {
-    title: "Hidratação e botox capilar",
-    text: "Cuidado capilar para a saúde e a aparência dos fios.",
-  },
-  {
-    title: "Outros cuidados",
-    text: "Consulte o estúdio sobre os demais serviços disponíveis.",
-  },
-]
+export default function JoaoNetoLanding() {
+  const whatsappMessage = encodeURIComponent(
+    "Olá, gostaria de agendar um horário com o JoãoNeto | Visagista!"
+  );
+  const whatsappNumber = "556332177937"; // Substitua pelo número real
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-const pillars = [
-  {
-    icon: Sparkles,
-    title: "Cuidado",
-    text: "Atenção a cada detalhe, do primeiro contato ao acabamento.",
-  },
-  {
-    icon: Eye,
-    title: "Intenção",
-    text: "Cada escolha de visual tem um porquê e conversa com quem você é.",
-  },
-  {
-    icon: Lock,
-    title: "Privacidade",
-    text: "Salas privativas para um atendimento tranquilo e confortável.",
-  },
-]
-
-const steps = [
-  {
-    title: "Conte o que deseja valorizar",
-    text: "Fale sobre o seu estilo, a sua rotina e o que você quer destacar na sua imagem.",
-  },
-  {
-    title: "Conheça as possibilidades",
-    text: "Explore as opções de cabelo, barba e consultoria que fazem sentido para você.",
-  },
-  {
-    title: "Agende pelo WhatsApp",
-    text: "Escolha o melhor horário direto com o estúdio, de forma simples e rápida.",
-  },
-]
-
-const gallery: GalleryImage[] = [
-  { src: "/conciso/espera-1.webp", alt: "Sala de espera com poltrona e sofá de couro marrom, escada de mármore e plantas", width: 960, height: 1280 },
-  { src: "/conciso/sala-pedra.webp", alt: "Sala privativa com parede de pedra, cadeira de barbeiro e espelho em arco iluminado", width: 960, height: 1280 },
-  { src: "/conciso/corredor.webp", alt: "Boiserie branca e porta de vidro com vista para a sala privativa", width: 960, height: 1280 },
-  { src: "/conciso/lavatorio-1.webp", alt: "Cadeira de barbeiro, lavatório e espelho em arco com luz âmbar", width: 960, height: 1280 },
-  { src: "/conciso/janela.webp", alt: "Cadeira de barbeiro ao lado de uma janela com vista para palmeiras", width: 960, height: 1280 },
-  { src: "/conciso/espera-2.webp", alt: "Poltrona de couro com braços de madeira diante do painel amadeirado", width: 960, height: 1280 },
-  { src: "/conciso/lavatorio-2.webp", alt: "Estação de atendimento com cadeira, lavatório e parede em tom areia", width: 960, height: 1280 },
-  { src: "/conciso/recepcao.webp", alt: "Recepção com balcão ripado de madeira e prateleiras iluminadas", width: 960, height: 1280 },
-  { src: "/conciso/espaco-lustre.webp", alt: "Escada de mármore, parede de pedra e lustre de cristal", width: 960, height: 1280 },
-  { src: "/conciso/sala-espelho.webp", alt: "Sala privativa com espelho em arco iluminado e piso de mármore", width: 1200, height: 1600 },
-  { src: "/conciso/sala-armario.webp", alt: "Cadeira de barbeiro, armário de madeira e iluminação em linha", width: 900, height: 1600 },
-  { src: "/conciso/fachada.webp", alt: "Fachada de vidro com o logotipo dourado do Conciso", width: 960, height: 1280 },
-]
-
-const marquee = [
-  "Cortes modernos",
-  "Consultoria de imagem",
-  "Consultoria visagista",
-  "Barba",
-  "Hidratação e botox capilar",
-  "Presença com propósito",
-]
-
-const btnPrimary =
-  "group inline-flex items-center justify-center gap-3 bg-brand-ivory px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-brand-black transition-colors duration-500 hover:bg-white"
-const btnGhost =
-  "group inline-flex items-center justify-center gap-3 border border-brand-ivory/40 px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-brand-ivory transition-colors duration-500 hover:border-brand-ivory hover:bg-brand-ivory/5"
-const eyebrow = "text-[0.7rem] font-medium uppercase tracking-[0.34em]"
-
-export default function ConcisoLanding() {
   return (
     <main id="topo" className="overflow-x-clip">
       <Header />
@@ -439,53 +355,37 @@ export default function ConcisoLanding() {
               Fale com o estúdio pelo WhatsApp para agendar o seu horário ou
               tirar dúvidas sobre os serviços.
             </p>
-            <div className="mt-12 flex flex-col gap-4 sm:flex-row">
-              <a
-                href={SITE.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={btnPrimary}
-              >
-                <MessageCircle className="h-4 w-4" />
-                WhatsApp
-              </a>
-              <a
-                href={SITE.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={btnGhost}
-              >
-                <Instagram className="h-4 w-4" />
-                {SITE.instagramHandle}
-              </a>
-            </div>
-          </Reveal>
+          </div>
 
-          <Reveal delay={150} className="lg:col-span-6">
-            <div className="border border-brand-ivory/15 bg-brand-graphite/60">
-              <div className="aspect-[16/10] w-full overflow-hidden border-b border-brand-ivory/15">
-                <iframe
-                  title="Localização do Conciso — Galeria Encore 21, Palmas"
-                  src={SITE.mapEmbed}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="h-full w-full border-0 opacity-90 grayscale invert contrast-[0.9]"
-                />
-              </div>
-              <div className="flex flex-col gap-6 p-8 md:flex-row md:items-end md:justify-between">
-                <div>
-                  <p className={`${eyebrow} mb-4 flex items-center gap-2 text-brand-silver`}>
-                    <MapPin className="h-4 w-4" strokeWidth={1.5} />
-                    Como chegar
-                  </p>
-                  <address className="space-y-1 text-sm font-normal not-italic leading-relaxed text-brand-ivory/90">
-                    {SITE.address.map((line) => (
-                      <p key={line}>{line}</p>
-                    ))}
-                  </address>
-                </div>
-                <a
-                  href={SITE.maps}
+          <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+            <div>
+              <h3 className="text-3xl font-bold text-premium-black mb-12">
+                Informações de Contato
+              </h3>
+              <div className="space-y-4">
+                <Link
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <div className="flex items-start space-x-4 group cursor-pointer hover:bg-premium-gold/5 p-4 rounded-2xl transition-all duration-300 min-h-[100px]">
+                    <div className="w-14 h-14 bg-premium-gold/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                      <Phone className="h-6 w-6 text-premium-gold" />
+                    </div>
+                    <div className="flex-1 min-w-0 flex flex-col justify-center">
+                      <p className="font-semibold text-premium-black text-lg mb-1">
+                        WhatsApp
+                      </p>
+                      <p className="text-gray-600 mb-1">+55 63 98437-6983</p>
+                      <p className="text-premium-gold text-sm font-medium">
+                        Clique para conversar
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+
+                <Link
+                  href="https://www.instagram.com/joaonetovisage"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2 border-b border-brand-taupe pb-1 text-[0.7rem] font-medium uppercase tracking-[0.24em] text-brand-ivory transition-colors hover:text-brand-taupe"
