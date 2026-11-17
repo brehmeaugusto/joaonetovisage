@@ -1,753 +1,577 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import Image from "next/image"
+import Link from "next/link"
 import {
-  Scissors,
-  User,
-  Phone,
-  Mail,
-  MapPin,
-  Instagram,
-  Award,
-  Crown,
-  Sparkles,
   ArrowRight,
-  Check,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+  ArrowUpRight,
+  Eye,
+  Instagram,
+  Lock,
+  MapPin,
+  MessageCircle,
+  Sparkles,
+} from "lucide-react"
+import { Header } from "@/components/site/header"
+import { Reveal } from "@/components/site/reveal"
+import { Gallery, type GalleryImage } from "@/components/site/gallery"
+import { NAV, SITE } from "@/lib/site"
 
-export default function JoaoNetoLanding() {
-  const whatsappMessage = encodeURIComponent(
-    "Olá, gostaria de agendar um horário com o JoãoNeto | Visagista!"
-  );
-  const whatsappNumber = "556332177937"; // Substitua pelo número real
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+const services = [
+  {
+    title: "Cortes modernos",
+    text: "Um corte alinhado ao seu estilo, à sua rotina e à imagem que você quer transmitir.",
+  },
+  {
+    title: "Consultoria de imagem",
+    text: "Orientação para construir uma imagem pessoal mais intencional e coerente.",
+  },
+  {
+    title: "Consultoria visagista",
+    text: "Atenção à harmonia entre cabelo, barba e os traços do seu rosto.",
+  },
+  {
+    title: "Barba",
+    text: "Acabamento preciso e cuidado com cada detalhe.",
+  },
+  {
+    title: "Hidratação e botox capilar",
+    text: "Cuidado capilar para a saúde e a aparência dos fios.",
+  },
+  {
+    title: "Outros cuidados",
+    text: "Consulte o estúdio sobre os demais serviços disponíveis.",
+  },
+]
 
+const pillars = [
+  {
+    icon: Sparkles,
+    title: "Cuidado",
+    text: "Atenção a cada detalhe, do primeiro contato ao acabamento.",
+  },
+  {
+    icon: Eye,
+    title: "Intenção",
+    text: "Cada escolha de visual tem um porquê e conversa com quem você é.",
+  },
+  {
+    icon: Lock,
+    title: "Privacidade",
+    text: "Salas privativas para um atendimento tranquilo e confortável.",
+  },
+]
+
+const steps = [
+  {
+    title: "Conte o que deseja valorizar",
+    text: "Fale sobre o seu estilo, a sua rotina e o que você quer destacar na sua imagem.",
+  },
+  {
+    title: "Conheça as possibilidades",
+    text: "Explore as opções de cabelo, barba e consultoria que fazem sentido para você.",
+  },
+  {
+    title: "Agende pelo WhatsApp",
+    text: "Escolha o melhor horário direto com o estúdio, de forma simples e rápida.",
+  },
+]
+
+const gallery: GalleryImage[] = [
+  { src: "/conciso/espera-1.webp", alt: "Sala de espera com poltrona e sofá de couro marrom, escada de mármore e plantas", width: 960, height: 1280 },
+  { src: "/conciso/sala-pedra.webp", alt: "Sala privativa com parede de pedra, cadeira de barbeiro e espelho em arco iluminado", width: 960, height: 1280 },
+  { src: "/conciso/corredor.webp", alt: "Boiserie branca e porta de vidro com vista para a sala privativa", width: 960, height: 1280 },
+  { src: "/conciso/lavatorio-1.webp", alt: "Cadeira de barbeiro, lavatório e espelho em arco com luz âmbar", width: 960, height: 1280 },
+  { src: "/conciso/janela.webp", alt: "Cadeira de barbeiro ao lado de uma janela com vista para palmeiras", width: 960, height: 1280 },
+  { src: "/conciso/espera-2.webp", alt: "Poltrona de couro com braços de madeira diante do painel amadeirado", width: 960, height: 1280 },
+  { src: "/conciso/lavatorio-2.webp", alt: "Estação de atendimento com cadeira, lavatório e parede em tom areia", width: 960, height: 1280 },
+  { src: "/conciso/recepcao.webp", alt: "Recepção com balcão ripado de madeira e prateleiras iluminadas", width: 960, height: 1280 },
+  { src: "/conciso/espaco-lustre.webp", alt: "Escada de mármore, parede de pedra e lustre de cristal", width: 960, height: 1280 },
+  { src: "/conciso/sala-espelho.webp", alt: "Sala privativa com espelho em arco iluminado e piso de mármore", width: 1200, height: 1600 },
+  { src: "/conciso/sala-armario.webp", alt: "Cadeira de barbeiro, armário de madeira e iluminação em linha", width: 900, height: 1600 },
+  { src: "/conciso/fachada.webp", alt: "Fachada de vidro com o logotipo dourado do Conciso", width: 960, height: 1280 },
+]
+
+const marquee = [
+  "Cortes modernos",
+  "Consultoria de imagem",
+  "Consultoria visagista",
+  "Barba",
+  "Hidratação e botox capilar",
+  "Presença com propósito",
+]
+
+const btnPrimary =
+  "group inline-flex items-center justify-center gap-3 bg-brand-ivory px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-brand-black transition-colors duration-500 hover:bg-white"
+const btnGhost =
+  "group inline-flex items-center justify-center gap-3 border border-brand-ivory/40 px-8 py-4 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-brand-ivory transition-colors duration-500 hover:border-brand-ivory hover:bg-brand-ivory/5"
+const eyebrow = "text-[0.7rem] font-medium uppercase tracking-[0.34em]"
+
+export default function ConcisoLanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-premium-white via-gray-50 to-premium-white">
-      {/* Header */}
-      <header className="fixed top-0 w-full bg-premium-white/90 backdrop-blur-xl border-b border-premium-gold/20 z-50">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Image
-                src="/logo.svg"
-                alt="João Neto Visage Logo"
-                width={150}
-                height={150}
-                className="w-150 h-150 rounded-xl object-contain"
-              />
-            </div>
-          </div>
+    <main id="topo" className="overflow-x-clip">
+      <Header />
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              href="#sobre"
-              className="text-gray-600 hover:text-premium-black transition-colors font-medium"
+      {/* ================= HERO ================= */}
+      <section className="relative isolate overflow-hidden bg-brand-black text-brand-ivory">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(55%_50%_at_78%_42%,rgba(165,154,147,0.16),transparent_70%)]" />
+        <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-brand-black to-transparent" />
+
+        <div className="mx-auto grid min-h-[100svh] max-w-7xl items-center gap-16 px-6 pb-24 pt-40 lg:grid-cols-12 lg:gap-8 lg:px-10 lg:pb-20 lg:pt-32">
+          <div className="lg:col-span-7">
+            <p
+              className={`${eyebrow} hero-in mb-8 text-brand-silver`}
+              style={{ ["--d" as string]: "100ms" }}
             >
-              Sobre
-            </Link>
-            <Link
-              href="#visagismo"
-              className="text-gray-600 hover:text-premium-black transition-colors font-medium"
-            >
-              Visagismo
-            </Link>
-            <Link
-              href="#galeria"
-              className="text-gray-600 hover:text-premium-black transition-colors font-medium"
-            >
-              Galeria
-            </Link>
-            <Link
-              href="#contato"
-              className="text-gray-600 hover:text-premium-black transition-colors font-medium"
-            >
-              Contato
-            </Link>
-          </nav>
-
-          <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <Button className="bg-premium-black hover:bg-gray-800 text-premium-white px-6 py-2 rounded-xl font-medium shadow-lg shadow-premium-black/25 transition-all duration-300 hover:shadow-premium-black/40">
-              Consultoria
-            </Button>
-          </Link>
-        </div>
-      </header>
-
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/principal.svg?height=1080&width=1920&text=Elegant+barbershop+interior+with+modern+styling+chair+and+premium+lighting"
-            alt="Ambiente elegante de barbearia premium"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-premium-black/40"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-premium-black/60 via-transparent to-premium-black/30"></div>
-        </div>
-
-        {/* Background Elements */}
-        <div className="absolute inset-0 z-10">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-premium-gold/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-premium-gold/15 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
-          <div className="mb-3">
-            <div className="inline-flex items-center space-x-2 bg-premium-white/20 backdrop-blur-xl border border-premium-gold/30 rounded-full px-4 py-2 mb-3 shadow-lg shadow-premium-black/20">
-              <Crown className="h-4 w-4 text-premium-gold" />
-              <span className="text-premium-white text-sm font-medium">
-                Consultoria de Visagismo Masculino
-              </span>
-            </div>
-          </div>
-
-          {/* Logo */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-premium-white/20 backdrop-blur-xl rounded-2xl p-4 border border-premium-gold/30 shadow-lg shadow-premium-black/20">
-              <Image
-                src="/logo.svg"
-                alt="João Neto Visage Logo"
-                width={250}
-                height={250}
-                className="w-250 h-250 object-contain"
-              />
-            </div>
-          </div>
-
-          <h1 className="text-6xl md:text-8xl font-bold mb-3 leading-tight">
-            <span className="text-premium-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] shadow-black">
-              Venha ser
-            </span>
-            <br />
-            <span className="text-premium-gold drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] shadow-black">
-              Elegante
-            </span>
-          </h1>
-
-          <div className="mb-3">
-            <h2 className="text-2xl md:text-3xl font-light text-premium-white/90 mb-4 drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] shadow-black">
-              Descubra o Melhor Estilo de cabelo para Você
-            </h2>
-            <p className="text-3xl md:text-4xl font-bold text-premium-white mb-8 drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] shadow-black">
-              Seu rosto é sua Marca!
+              Studio de imagem masculina · Palmas, TO
             </p>
+            <h1
+              className="hero-in font-display text-[clamp(3.4rem,8.4vw,7.6rem)] font-light leading-[0.94] tracking-tight"
+              style={{ ["--d" as string]: "250ms" }}
+            >
+              Sua imagem
+              <br />
+              <em className="font-light italic text-brand-taupe">fala</em> por você.
+            </h1>
+            <p
+              className="hero-in mt-9 max-w-md text-base font-normal leading-relaxed text-brand-ivory/90 md:text-lg"
+              style={{ ["--d" as string]: "450ms" }}
+            >
+              A aparência comunica cuidado e intenção antes mesmo da primeira
+              palavra. No Conciso, cada detalhe trabalha a seu favor.
+            </p>
+            <div
+              className="hero-in mt-12 flex flex-col gap-4 sm:flex-row"
+              style={{ ["--d" as string]: "600ms" }}
+            >
+              <a
+                href={SITE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={btnPrimary}
+              >
+                Agendar pelo WhatsApp
+                <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+              </a>
+              <Link href="#espaco" className={btnGhost}>
+                Conhecer o estúdio
+              </Link>
+            </div>
           </div>
 
-          <p className="text-xl md:text-2xl mb-12 text-premium-white/80 max-w-4xl mx-auto leading-relaxed font-light drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)] shadow-black">
-            Conte com minha orientação profissional para transformar seu visual,
-            expressar sua personalidade e elevar sua autoestima.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link
-              href="https://www.trinks.com/sion-barber-club-ltda/escolha-profissional/12564413/frameBusca"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                className="bg-premium-gold hover:bg-premium-gold/90 text-premium-black px-10 py-4 text-lg rounded-xl font-medium shadow-xl shadow-premium-black/50 transition-all duration-300 hover:shadow-premium-black/60 hover:scale-105 group"
-              >
-                Agendar Consultoria
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link
-              href="https://api.whatsapp.com/message/5DZV2XBIWZEKI1?autoload=1&app_absent=0"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-premium-white/50 text-premium-white hover:bg-premium-white/10 px-8 py-4 text-lg rounded-xl font-medium backdrop-blur-xl bg-premium-white/5"
-              >
-                Saiba Mais
-              </Button>
-            </Link>
+          <div
+            className="hero-in relative mx-auto w-full max-w-[26rem] lg:col-span-5 lg:max-w-none lg:pl-10"
+            style={{ ["--d" as string]: "400ms" }}
+          >
+            <div className="relative mx-auto w-full max-w-md">
+              <div className="absolute -inset-3 translate-x-5 translate-y-5 rounded-t-full border border-brand-taupe/40" />
+              <div className="relative aspect-[3/4.2] overflow-hidden rounded-t-full bg-brand-graphite">
+                <Image
+                  src="/conciso/recepcao.webp"
+                  alt="Recepção do Conciso com balcão de madeira ripada, prateleiras iluminadas e pé-direito duplo"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 36vw, 90vw"
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-black/40 via-transparent to-transparent" />
+              </div>
+              <div className="absolute -bottom-10 -left-6 aspect-[3/4] w-32 overflow-hidden rounded-t-full border-[6px] border-brand-black bg-brand-graphite sm:-left-14 sm:w-44">
+                <Image
+                  src="/conciso/sala-espelho.webp"
+                  alt="Sala privativa com espelho em arco iluminado"
+                  fill
+                  sizes="180px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 lg:flex">
+          <span className="text-[0.62rem] uppercase tracking-[0.4em] text-brand-taupe">
+            Role
+          </span>
+          <span className="h-10 w-px bg-gradient-to-b from-brand-taupe to-transparent" />
         </div>
       </section>
 
-      {/* Sobre Section */}
-      <section id="sobre" className="py-32 relative">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-20 items-center max-w-7xl mx-auto">
-            <div className="order-2 md:order-1">
-              <div className="mb-3">
-                <div className="inline-flex items-center space-x-2 bg-premium-gold/10 border border-premium-gold/30 rounded-full px-4 py-2 mb-6">
-                  <Award className="h-4 w-4 text-premium-gold" />
-                  <span className="text-premium-black text-sm font-medium">
-                    Mais de 10 Anos de Experiência
-                  </span>
-                </div>
-              </div>
+      {/* ================= FAIXA ================= */}
+      <div
+        aria-hidden="true"
+        className="overflow-hidden border-y border-brand-ivory/10 bg-brand-black py-6"
+      >
+        <div className="marquee-track">
+          {[0, 1].map((n) => (
+            <div key={n} className="flex shrink-0 items-center">
+              {marquee.map((item) => (
+                <span
+                  key={`${n}-${item}`}
+                  className="flex items-center font-display text-2xl font-light italic text-brand-ivory/90 md:text-3xl"
+                >
+                  <span className="px-8">{item}</span>
+                  <span className="h-1.5 w-1.5 rotate-45 bg-brand-taupe" />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
-              <h2 className="text-5xl font-bold mb-8 text-premium-black">
-                João Neto
+      {/* ================= FILOSOFIA ================= */}
+      <section
+        id="filosofia"
+        className="scroll-mt-20 bg-brand-ivory py-28 text-brand-black md:py-40"
+      >
+        <div className="mx-auto grid max-w-7xl items-center gap-20 px-6 lg:grid-cols-12 lg:px-10">
+          <Reveal className="relative lg:col-span-6">
+            <div className="relative mb-16 aspect-[4/5] w-[80%] overflow-hidden rounded-t-full bg-brand-silver">
+              <Image
+                src="/conciso/espaco-lustre.webp"
+                alt="Escada de mármore, parede de pedra e lustre de cristal no Conciso"
+                fill
+                sizes="(min-width: 1024px) 38vw, 80vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="absolute bottom-0 right-0 aspect-[3/4] w-[46%] overflow-hidden border-[10px] border-brand-ivory bg-brand-silver sm:right-4">
+              <Image
+                src="/conciso/fachada.webp"
+                alt="Fachada de vidro com o logotipo do Conciso"
+                fill
+                sizes="(min-width: 1024px) 18vw, 40vw"
+                className="object-cover"
+              />
+            </div>
+          </Reveal>
+
+          <div className="lg:col-span-6 lg:pl-10">
+            <Reveal>
+              <p className={`${eyebrow} mb-6 text-brand-graphite`}>
+                Presença com propósito
+              </p>
+              <h2 className="font-display text-5xl font-light leading-[1.02] md:text-7xl">
+                Um visual que
+                <br />
+                <em className="italic">representa você.</em>
               </h2>
-
-              <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
-                <p className="text-xl text-gray-700 font-light">
-                  <span className="text-premium-black font-semibold">
-                    Barbeiro há mais de 10 anos
-                  </span>
-                  , com foco em revelar a verdadeira identidade de cada cliente.
+              <div className="mt-10 max-w-lg space-y-6 text-pretty text-base font-normal leading-relaxed text-brand-graphite md:text-lg">
+                <p>
+                  O nosso trabalho começa entendendo o que combina com cada
+                  cliente: o seu estilo, a sua rotina e a imagem que você quer
+                  transmitir.
                 </p>
                 <p>
-                  Desde 2022, aprofundei meus estudos no{" "}
-                  <span className="text-premium-black font-medium">
-                    visagismo masculino
-                  </span>
-                  , onde técnica e arte se encontram para criar um visual com
-                  propósito.
+                  Aqui, corte, barba e consultoria se encontram para construir
+                  uma presença segura, atual e fiel a quem você é.
                 </p>
               </div>
+            </Reveal>
 
-              <div className="mt-10 flex items-center space-x-8">
-                <div className="flex items-center space-x-2">
-                  <Check className="h-5 w-5 text-premium-gold" />
-                  <span className="text-gray-700 font-medium">
-                    Especialista em Visagismo
-                  </span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Check className="h-5 w-5 text-premium-gold" />
-                  <span className="text-gray-700 font-medium">
-                    Atendimento Personalizado
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="order-1 md:order-2 relative">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-premium-gold/10 rounded-3xl blur-2xl"></div>
-                <div className="relative bg-premium-white/90 backdrop-blur-xl rounded-3xl p-2 shadow-2xl shadow-premium-black/10 border border-premium-gold/20">
-                  <Image
-                    src="/perfil.jpg?height=600&width=500"
-                    alt="João Neto - Visagista"
-                    width={500}
-                    height={600}
-                    className="rounded-2xl"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 bg-premium-white/95 backdrop-blur-xl p-4 rounded-2xl shadow-xl shadow-premium-black/10 border border-premium-gold/20">
-                  <Scissors className="h-8 w-8 text-premium-gold" />
-                </div>
-              </div>
+            <div className="mt-14 grid gap-10 border-t border-brand-black/15 pt-10 sm:grid-cols-3">
+              {pillars.map((p, i) => (
+                <Reveal key={p.title} delay={i * 120}>
+                  <p.icon className="mb-4 h-5 w-5 text-brand-black" strokeWidth={1.4} />
+                  <h3 className="font-display text-2xl">{p.title}</h3>
+                  <p className="mt-2 text-[0.95rem] font-normal leading-relaxed text-brand-graphite">
+                    {p.text}
+                  </p>
+                </Reveal>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Visagismo Section */}
+      {/* ================= SERVIÇOS ================= */}
       <section
-        id="visagismo"
-        className="py-32 bg-gradient-to-b from-gray-50 to-premium-white relative"
+        id="servicos"
+        className="scroll-mt-20 bg-brand-black py-28 text-brand-ivory md:py-40"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto text-center mb-20">
-            <div className="inline-flex items-center space-x-2 bg-premium-gold/10 border border-premium-gold/30 rounded-full px-4 py-2 mb-8">
-              <Sparkles className="h-4 w-4 text-premium-gold" />
-              <span className="text-premium-black text-sm font-medium">
-                O que é Visagismo?
-              </span>
-            </div>
-
-            <h2 className="text-5xl font-bold mb-8 text-premium-black">
-              A Arte de Harmonizar
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal className="mb-16 max-w-2xl md:mb-24">
+            <p className={`${eyebrow} mb-6 text-brand-silver`}>Serviços</p>
+            <h2 className="font-display text-5xl font-light leading-[1.02] md:text-7xl">
+              Do corte à consultoria,
+              <br />
+              <em className="italic text-brand-taupe">cada detalhe importa.</em>
             </h2>
+          </Reveal>
 
-            <div className="text-left max-w-4xl mx-auto">
-              <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                <span className="text-premium-black font-semibold">
-                  Visagismo é a ciência e a arte
-                </span>{" "}
-                de harmonizar o seu rosto com o seu estilo, personalidade e
-                estilo de vida. Não é apenas sobre aparência, mas sobre se
-                sentir bem consigo mesmo, aumentar a confiança e destacar o que
-                você tem de melhor.
-              </p>
-
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Aqui, você vai descobrir como a{" "}
-                <span className="text-premium-black font-medium">
-                  consultoria personalizada
-                </span>{" "}
-                pode ajudar a transformar seu visual para que ele fale por você,
-                mostrando sua identidade real.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/10 transition-all duration-300 group rounded-2xl">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-premium-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <User className="h-8 w-8 text-premium-gold" />
-                </div>
-                <h3 className="text-xl font-bold text-premium-black mb-4">
-                  Análise Personalizada
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Estudo completo do seu rosto, personalidade e estilo de vida
-                  para criar harmonia perfeita.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/10 transition-all duration-300 group rounded-2xl">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-premium-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Scissors className="h-8 w-8 text-premium-gold" />
-                </div>
-                <h3 className="text-xl font-bold text-premium-black mb-4">
-                  Transformação Visual
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Corte e estilo que expressam sua personalidade e destacam seus
-                  melhores atributos.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/10 transition-all duration-300 group rounded-2xl">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-premium-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Crown className="h-8 w-8 text-premium-gold" />
-                </div>
-                <h3 className="text-xl font-bold text-premium-black mb-4">
-                  Elevação da Autoestima
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Aumento da confiança através de um visual que realmente
-                  representa quem você é.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Galeria Section */}
-      <section id="galeria" className="py-32 relative">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-5">
-            <div className="inline-flex items-center space-x-2 bg-premium-gold/10 border border-premium-gold/30 rounded-full px-4 py-2 mb-5">
-              <Award className="h-4 w-4 text-premium-gold" />
-              <span className="text-premium-black text-sm font-medium">
-                Nossos Trabalhos
-              </span>
-            </div>
-
-            <h2 className="text-5xl font-bold mb-3 text-premium-black">
-              Galeria de Transformações
-            </h2>
-            <p className="text-xl text-gray-600">
-              Conheça alguns dos nossos trabalhos e veja como cada cliente
-              encontrou sua melhor versão
-            </p>
-          </div>
-
-          {/* Grid de Imagens - Layout Otimizado para 4 Fotos Verticais */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto mb-5">
-            {/* Trabalho 1 */}
-            <Card className="group bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/15 transition-all duration-500 rounded-2xl overflow-hidden">
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden">
+          <div className="grid gap-16 lg:grid-cols-12 lg:gap-12">
+            <Reveal className="hidden lg:col-span-4 lg:block">
+              <div className="sticky top-32">
+                <div className="relative aspect-[9/14] overflow-hidden rounded-t-full bg-brand-graphite">
                   <Image
-                    src="/3.svg?height=2080&width=1170&text=Transformação+executiva+premium+antes+e+depois"
-                    alt="Transformação executiva premium"
-                    width={1170}
-                    height={2080}
-                    className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-500"
+                    src="/conciso/sala-armario.webp"
+                    alt="Cadeira de barbeiro e armário de madeira em sala privativa"
+                    fill
+                    sizes="30vw"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-premium-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="bg-premium-white/95 backdrop-blur-xl rounded-xl p-4 border border-premium-gold/20">
-                      <h4 className="font-bold text-premium-black mb-1">
-                        Executivo Premium
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Transformação completa
-                      </p>
-                      <div className="flex items-center mt-2">
-                        <div className="w-2 h-2 bg-premium-gold rounded-full mr-2"></div>
-                        <span className="text-xs text-premium-gold font-medium">
-                          Antes & Depois
-                        </span>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </Reveal>
 
-            {/* Trabalho 2 */}
-            <Card className="group bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/15 transition-all duration-500 rounded-2xl overflow-hidden">
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden">
-                  <Image
-                    src="/4.svg?height=2080&width=1170&text=Estilo+moderno+com+barba+alinhada+profissional"
-                    alt="Estilo moderno profissional"
-                    width={1170}
-                    height={2080}
-                    className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-premium-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="bg-premium-white/95 backdrop-blur-xl rounded-xl p-4 border border-premium-gold/20">
-                      <h4 className="font-bold text-premium-black mb-1">
-                        Estilo Moderno
-                      </h4>
-                      <p className="text-gray-600 text-sm">Técnica avançada</p>
-                      <div className="flex items-center mt-2">
-                        <div className="w-2 h-2 bg-premium-gold rounded-full mr-2"></div>
-                        <span className="text-xs text-premium-gold font-medium">
-                          Corte + Barba
+            <div className="lg:col-span-8">
+              <ul className="divide-y divide-brand-ivory/15 border-y border-brand-ivory/15">
+                {services.map((s, i) => (
+                  <li key={s.title}>
+                    <Reveal delay={i * 60}>
+                      <a
+                        href={SITE.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group grid grid-cols-[3rem_1fr] gap-x-4 py-8 transition-colors md:py-10 xl:grid-cols-[3.5rem_1fr_1fr] xl:items-baseline xl:gap-x-8"
+                      >
+                        <span className="font-display text-xl text-brand-taupe">
+                          {String(i + 1).padStart(2, "0")}
                         </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Trabalho 3 */}
-            <Card className="group bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/15 transition-all duration-500 rounded-2xl overflow-hidden">
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden">
-                  <Image
-                    src="/1.svg?height=2080&width=1170&text=Visagismo+completo+jovem+executivo+elegante"
-                    alt="Visagismo jovem executivo"
-                    width={1170}
-                    height={2080}
-                    className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-premium-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="bg-premium-white/95 backdrop-blur-xl rounded-xl p-4 border border-premium-gold/20">
-                      <h4 className="font-bold text-premium-black mb-1">
-                        Jovem Executivo
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Estilo sofisticado
-                      </p>
-                      <div className="flex items-center mt-2">
-                        <div className="w-2 h-2 bg-premium-gold rounded-full mr-2"></div>
-                        <span className="text-xs text-premium-gold font-medium">
-                          Visagismo
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Trabalho 4 */}
-            <Card className="group bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-xl shadow-premium-black/5 hover:shadow-premium-black/15 transition-all duration-500 rounded-2xl overflow-hidden">
-              <CardContent className="p-0">
-                <div className="relative overflow-hidden">
-                  <Image
-                    src="/2.svg?height=2080&width=1170&text=Barba+esculpida+premium+design+personalizado"
-                    alt="Barba esculpida premium"
-                    width={1170}
-                    height={2080}
-                    className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-premium-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <div className="bg-premium-white/95 backdrop-blur-xl rounded-xl p-4 border border-premium-gold/20">
-                      <h4 className="font-bold text-premium-black mb-1">
-                        Barba Premium
-                      </h4>
-                      <p className="text-gray-600 text-sm">Design exclusivo</p>
-                      <div className="flex items-center mt-2">
-                        <div className="w-2 h-2 bg-premium-gold rounded-full mr-2"></div>
-                        <span className="text-xs text-premium-gold font-medium">
-                          Especialidade
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* CTA da Galeria */}
-          <div className="text-center">
-            <p className="text-xl text-gray-600 mb-5">
-              Quer ver mais trabalhos? Siga nosso Instagram para acompanhar as
-              transformações diárias
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link
-                href="https://instagram.com/joaonetovisage"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  size="lg"
-                  className="bg-premium-gold hover:bg-premium-gold/90 text-premium-black px-8 py-4 text-lg rounded-xl font-medium shadow-xl shadow-premium-black/25 transition-all duration-300 hover:shadow-premium-black/40 hover:scale-105 group"
+                        <h3 className="font-display text-3xl font-light transition-transform duration-500 group-hover:translate-x-2 md:text-4xl">
+                          {s.title}
+                        </h3>
+                        <p className="col-start-2 mt-3 max-w-sm text-[0.95rem] font-normal leading-relaxed text-brand-ivory/85 transition-colors group-hover:text-brand-ivory xl:col-start-3 xl:mt-0">
+                          {s.text}
+                        </p>
+                      </a>
+                    </Reveal>
+                  </li>
+                ))}
+              </ul>
+              <Reveal className="mt-12">
+                <a
+                  href={SITE.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={btnGhost}
                 >
-                  <Instagram className="mr-2 h-5 w-5" />
-                  Seguir no Instagram
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-premium-gold text-premium-black hover:bg-premium-gold/10 px-8 py-4 text-lg rounded-xl font-medium bg-transparent"
-                >
-                  Agendar Consultoria
-                </Button>
-              </Link>
+                  Falar com o estúdio
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-15 relative overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-premium-gold/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-premium-gold/15 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center space-x-2 bg-premium-gold/10 border border-premium-gold/30 rounded-full px-4 py-2 mb-8">
-              <Crown className="h-4 w-4 text-premium-gold" />
-              <span className="text-premium-black text-sm font-medium">
-                Sua Transformação Começa Agora
-              </span>
+      {/* ================= O ESPAÇO ================= */}
+      <section
+        id="espaco"
+        className="scroll-mt-20 bg-brand-graphite py-28 text-brand-ivory md:py-40"
+      >
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal className="mb-16 grid gap-8 md:mb-20 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className={`${eyebrow} mb-6 text-brand-silver`}>O espaço</p>
+              <h2 className="font-display text-5xl font-light leading-[1.02] md:text-7xl">
+                Privacidade
+                <br />
+                <em className="italic text-brand-taupe">e conforto.</em>
+              </h2>
             </div>
+            <p className="max-w-md text-base font-normal leading-relaxed text-brand-ivory/90 md:text-lg lg:col-span-5 lg:justify-self-end">
+              Um ambiente profissional, com salas privativas, pensado para o seu
+              conforto e para um atendimento atento a cada detalhe.
+            </p>
+          </Reveal>
 
-            <h2 className="text-5xl md:text-6xl font-bold mb-5 text-premium-black leading-tight">
-              Chegou a hora de investir em você
+          <Reveal>
+            <Gallery images={gallery} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ================= COMO FUNCIONA ================= */}
+      <section className="bg-brand-ivory py-28 text-brand-black md:py-36">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <Reveal className="mb-16 md:mb-20">
+            <p className={`${eyebrow} mb-6 text-brand-graphite`}>Próximos passos</p>
+            <h2 className="font-display text-5xl font-light leading-[1.02] md:text-6xl">
+              Simples como <em className="italic">deve ser.</em>
             </h2>
-
-            <div className="space-y-6 text-xl md:text-2xl text-gray-600 mb-12">
-              <p className="font-light">
-                Sua imagem fala antes mesmo de você dizer qualquer palavra.
-              </p>
-              <p className="text-premium-black font-semibold text-2xl md:text-3xl">
-                Seu rosto é sua marca.
-              </p>
-              <p className="font-light">
-                Venha se redescobrir e encontrar a sua melhor versão.
-              </p>
-            </div>
-
-            <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                className="bg-premium-black hover:bg-gray-800 text-premium-white px-12 py-6 text-xl rounded-xl font-medium shadow-2xl shadow-premium-black/25 transition-all duration-300 hover:shadow-premium-black/40 hover:scale-105 group"
-              >
-                Descobrir Minha Melhor Versão
-                <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
+          </Reveal>
+          <div className="grid gap-12 md:grid-cols-3 md:gap-10">
+            {steps.map((s, i) => (
+              <Reveal key={s.title} delay={i * 130}>
+                <div className="border-t border-brand-black/20 pt-8">
+                  <span className="font-display text-7xl font-light italic text-brand-taupe">
+                    {i + 1}
+                  </span>
+                  <h3 className="mt-4 font-display text-3xl leading-tight">
+                    {s.title}
+                  </h3>
+                  <p className="mt-4 max-w-xs text-[0.95rem] font-normal leading-relaxed text-brand-graphite">
+                    {s.text}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
+          <Reveal className="mt-16">
+            <p className="inline-flex items-center gap-3 border border-brand-black/20 px-5 py-3 text-[0.68rem] uppercase tracking-[0.26em] text-brand-graphite">
+              <span className="h-1.5 w-1.5 rotate-45 bg-brand-black" />
+              Em breve: aplicativo próprio de agendamento
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* Contato Section */}
+      {/* ================= CONTATO ================= */}
       <section
         id="contato"
-        className="py-32 bg-gradient-to-b from-gray-50 to-premium-white"
+        className="relative scroll-mt-20 overflow-hidden bg-brand-black py-28 text-brand-ivory md:py-40"
       >
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center mb-20">
-            <h2 className="text-5xl font-bold mb-8 text-premium-black">
-              Entre em Contato
+        <div className="absolute inset-0 bg-[radial-gradient(50%_60%_at_20%_30%,rgba(165,154,147,0.12),transparent_70%)]" />
+        <div className="relative mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-12 lg:gap-10 lg:px-10">
+          <Reveal className="lg:col-span-6">
+            <Image
+              src="/conciso/conciso-selo-marfim.svg"
+              alt="Selo do Conciso — Studio de Imagem Masculina, Palmas, Tocantins"
+              width={130}
+              height={163}
+              className="mb-10 h-32 w-auto"
+            />
+            <h2 className="font-display text-5xl font-light leading-[1.02] md:text-7xl">
+              Cuide da
+              <br />
+              <em className="italic text-brand-taupe">sua imagem.</em>
             </h2>
-            <p className="text-xl text-gray-600">
-              Pronto para transformar sua imagem? Vamos conversar sobre sua
-              jornada de transformação.
+            <p className="mt-8 max-w-md text-base font-normal leading-relaxed text-brand-ivory/90 md:text-lg">
+              Fale com o estúdio pelo WhatsApp para agendar o seu horário ou
+              tirar dúvidas sobre os serviços.
             </p>
-          </div>
+            <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+              <a
+                href={SITE.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={btnPrimary}
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp
+              </a>
+              <a
+                href={SITE.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={btnGhost}
+              >
+                <Instagram className="h-4 w-4" />
+                {SITE.instagramHandle}
+              </a>
+            </div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-16 max-w-6xl mx-auto">
-            <div>
-              <h3 className="text-3xl font-bold text-premium-black mb-12">
-                Informações de Contato
-              </h3>
-              <div className="space-y-4">
-                <Link
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="flex items-start space-x-4 group cursor-pointer hover:bg-premium-gold/5 p-4 rounded-2xl transition-all duration-300 min-h-[100px]">
-                    <div className="w-14 h-14 bg-premium-gold/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                      <Phone className="h-6 w-6 text-premium-gold" />
-                    </div>
-                    <div className="flex-1 min-w-0 flex flex-col justify-center">
-                      <p className="font-semibold text-premium-black text-lg mb-1">
-                        WhatsApp
-                      </p>
-                      <p className="text-gray-600 mb-1">+55 63 98437-6983</p>
-                      <p className="text-premium-gold text-sm font-medium">
-                        Clique para conversar
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-
-                <Link
-                  href="https://www.instagram.com/joaonetovisage"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="flex items-start space-x-6 group cursor-pointer hover:bg-premium-gold/5 p-4 rounded-2xl transition-all duration-300 min-h-[100px]">
-                    <div className="w-14 h-14 bg-premium-gold/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                      <Instagram className="h-6 w-6 text-premium-gold" />
-                    </div>
-                    <div className="flex-1 min-w-0 flex flex-col justify-center">
-                      <p className="font-semibold text-premium-black text-lg mb-1">
-                        Instagram
-                      </p>
-                      <p className="text-gray-600 mb-1">@joaonetovisage</p>
-                      <p className="text-premium-gold text-sm font-medium">
-                        Siga para ver nosso trabalho
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-
-                <div className="flex items-start space-x-6 group cursor-pointer hover:bg-premium-gold/5 p-4 rounded-2xl transition-all duration-300 min-h-[100px]">
-                  <div className="w-14 h-14 bg-premium-gold/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                    <MapPin className="h-6 w-6 text-premium-gold" />
-                  </div>
-                  <div className="flex-1 min-w-0 flex flex-col justify-center">
-                    <p className="font-semibold text-premium-black text-lg mb-1">
-                      Localização
-                    </p>
-                    <p className="text-gray-600 mb-1">
-                      Rua SO 05, ACSO 1, Nº 1 Conjunto 04, Lote 41, Sala 01,
-                      Palmas, Tocantins 77015018
-                    </p>
-                    <p className="text-gray-600 text-sm">
-                      Sion Barber Club | João Neto Visage
-                    </p>
-                  </div>
+          <Reveal delay={150} className="lg:col-span-6">
+            <div className="border border-brand-ivory/15 bg-brand-graphite/60">
+              <div className="aspect-[16/10] w-full overflow-hidden border-b border-brand-ivory/15">
+                <iframe
+                  title="Localização do Conciso — Galeria Encore 21, Palmas"
+                  src={SITE.mapEmbed}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full border-0 opacity-90 grayscale invert contrast-[0.9]"
+                />
+              </div>
+              <div className="flex flex-col gap-6 p-8 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <p className={`${eyebrow} mb-4 flex items-center gap-2 text-brand-silver`}>
+                    <MapPin className="h-4 w-4" strokeWidth={1.5} />
+                    Como chegar
+                  </p>
+                  <address className="space-y-1 text-sm font-normal not-italic leading-relaxed text-brand-ivory/90">
+                    {SITE.address.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </address>
                 </div>
+                <a
+                  href={SITE.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-2 border-b border-brand-taupe pb-1 text-[0.7rem] font-medium uppercase tracking-[0.24em] text-brand-ivory transition-colors hover:text-brand-taupe"
+                >
+                  Abrir no Maps
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
               </div>
             </div>
-
-            <div>
-              <Card className="bg-premium-white/90 backdrop-blur-xl border border-premium-gold/20 shadow-2xl shadow-premium-black/10 rounded-3xl overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="p-8 pb-4">
-                    <h3 className="text-3xl font-bold text-premium-black mb-4 text-center">
-                      Nossa Localização
-                    </h3>
-                    <p className="text-gray-600 text-center mb-6">
-                      Venha nos visitar em nosso espaço premium
-                    </p>
-                  </div>
-
-                  {/* Mapa */}
-                  <div className="relative h-96 bg-gray-100 rounded-b-3xl overflow-hidden">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d507.89527107222784!2d-48.33760097725805!3d-10.187876928980574!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9324cbc769fdc40b%3A0x6a694989cb6835d6!2sSion%20Barber%20Club!5e1!3m2!1spt-BR!2sbr!4v1752254791471!5m2!1spt-BR!2sbr"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="grayscale hover:grayscale-0 transition-all duration-500"
-                    ></iframe>
-
-                    {/* Overlay com informações */}
-                    <div className="absolute bottom-4 left-4 right-4 bg-premium-white/95 backdrop-blur-xl rounded-xl p-4 border border-premium-gold/20">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-premium-gold/10 rounded-xl flex items-center justify-center">
-                          <MapPin className="h-5 w-5 text-premium-gold" />
-                        </div>
-                        <div>
-                          <p className="font-semibold text-premium-black text-sm">
-                            Sion Barber Club | João Neto Visage
-                          </p>
-                          <p className="text-gray-600 text-xs">
-                            Rua SO 05, ACSO 1, Nº 1 Conjunto 04, Lote 41, Sala
-                            01, Palmas, Tocantins 77015018
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-premium-black text-premium-white py-16">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between mb-8">
-            <div className="flex items-center space-x-3 mb-6 md:mb-0">
+      {/* ================= RODAPÉ ================= */}
+      <footer className="border-t border-brand-ivory/10 bg-brand-black py-16 text-brand-ivory">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
+          <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between">
+            <div>
               <Image
-                src="/logo2.svg"
-                alt="João Neto Visage Logo"
-                width={150}
-                height={150}
-                className="w-150 h-150 rounded-xl object-contain"
+                src="/conciso/conciso-horizontal-claro.svg"
+                alt="Conciso — Studio de Imagem Masculina"
+                width={214}
+                height={96}
+                className="h-20 w-auto"
               />
+              <p className="mt-6 font-display text-2xl font-light italic text-brand-taupe">
+                {SITE.tagline}
+              </p>
             </div>
-            <div className="flex space-x-4">
-              <Link
-                href="#"
-                className="text-gray-400 hover:text-premium-gold transition-colors p-3 rounded-xl hover:bg-gray-800"
-              >
-                <Instagram className="h-5 w-5" />
-              </Link>
-              <Link
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-premium-gold transition-colors p-3 rounded-xl hover:bg-gray-800"
-              >
-                <Phone className="h-5 w-5" />
-              </Link>
-              <Link
-                href="#"
-                className="text-gray-400 hover:text-premium-gold transition-colors p-3 rounded-xl hover:bg-gray-800"
-              >
-                <Mail className="h-5 w-5" />
-              </Link>
+
+            <nav aria-label="Rodapé" className="flex flex-col gap-3">
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-[0.7rem] font-medium uppercase tracking-[0.28em] text-brand-ivory/90 transition-colors hover:text-brand-ivory"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="space-y-1 text-sm font-normal leading-relaxed text-brand-ivory/85">
+              {SITE.address.map((line) => (
+                <p key={line}>{line}</p>
+              ))}
+              <div className="flex gap-5 pt-4">
+                <a
+                  href={SITE.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram do Conciso"
+                  className="text-brand-ivory transition-colors hover:text-brand-taupe"
+                >
+                  <Instagram className="h-5 w-5" strokeWidth={1.5} />
+                </a>
+                <a
+                  href={SITE.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp do Conciso"
+                  className="text-brand-ivory transition-colors hover:text-brand-taupe"
+                >
+                  <MessageCircle className="h-5 w-5" strokeWidth={1.5} />
+                </a>
+              </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p className="text-gray-400 mb-2">
-              &copy; 2025 Briefing Inteligência de Negócios. Todos os direitos
-              reservados.
-            </p>
-            <p className="text-premium-gold text-sm">
-              Transformando sua empresa através da tecnologia
-            </p>
+
+          <div className="mt-14 flex flex-col gap-3 border-t border-brand-ivory/10 pt-8 text-[0.68rem] uppercase tracking-[0.24em] text-brand-silver md:flex-row md:justify-between">
+            <p>© 2026 {SITE.fullName}</p>
+            <p>Palmas · Tocantins</p>
           </div>
         </div>
       </footer>
-    </div>
-  );
+
+      {/* WhatsApp flutuante */}
+      <a
+        href={SITE.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Agendar pelo WhatsApp"
+        className="fixed bottom-5 right-5 z-30 flex h-14 w-14 items-center justify-center rounded-full bg-brand-ivory text-brand-black shadow-[0_10px_40px_rgba(0,0,0,0.5)] transition-transform duration-500 hover:scale-110 md:bottom-8 md:right-8"
+      >
+        <MessageCircle className="h-6 w-6" strokeWidth={1.6} />
+      </a>
+    </main>
+  )
 }

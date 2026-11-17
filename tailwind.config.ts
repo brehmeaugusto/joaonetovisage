@@ -53,11 +53,24 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        brand: {
+          black: "#000000",
+          graphite: "#1A1A1A",
+          slate: "#4D4D4D",
+          taupe: "#A59A93",
+          ivory: "#EDE9E6",
+          mist: "#E6E6E6",
+          silver: "#CCCCCC",
+        },
         premium: {
           gold: "#baaa6e",
           black: "#000201",
           white: "#fcfeff",
         },
+      },
+      fontFamily: {
+        display: ["var(--font-display)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
